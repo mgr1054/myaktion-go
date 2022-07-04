@@ -6,8 +6,9 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/mgr1054/myaktion-go/src/myaktion/client"
-	"github.com/mgr1054/myaktion-go/src/myaktion/client/banktransfer"
+	"github.com/mgr1054/myaktion-go/myaktion-go/src/myaktion/client"
+	"github.com/mgr1054/myaktion-go/myaktion-go/src/myaktion/client/banktransfer"
+	"github.com/mgr1054/myaktion-go/myaktion-go/src/myaktion/service"
 )
 
 func monitortransactions() {
@@ -41,7 +42,13 @@ func connectandmonitor() {
 			continue
 		}
 		entry := log.WithField("transaction", transaction)
-		entry.Info("Received transaction. Sending processing response")
+		entry.Info("Received transaction")
+		err = service.MarkDonation(uint(transaction.DonationId))
+		if err != nil {
+			entry.WithError(err).Error("error changing donation status")
+			continue
+		}
+		entry.Info("Sending processing response")
 		err = watcher.Send(&banktransfer.ProcessingResponse{Id: transaction.Id})
 		if err != nil {
 			entry.WithError(err).Error("error sending processing response")

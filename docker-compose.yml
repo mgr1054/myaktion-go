@@ -1,10 +1,17 @@
 services:
+  banktransfer:
+    build:
+      context: ./src
+      dockerfile: banktransfer/Dockerfile
   myaktion:
-    build: ./src/myaktion
+    build:
+      context: ./src
+      dockerfile: myaktion/Dockerfile
     ports:
       - "8000:8000"
     environment:
       - DB_CONNECT=mariadb:3306
+      - BANKTRANSFER_CONNECT=banktransfer:9111
       - LOG_LEVEL=info # change to trace for debugging
   mariadb:
     image: mariadb:10.5
