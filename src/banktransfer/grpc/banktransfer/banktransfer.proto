@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package banktransfer;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/mgr1054/myaktion-go/src/banktransfer/grpc/banktransfer";
+
+service BankTransfer {
+    rpc TransferMoney (Transaction) returns (google.protobuf.Empty) {}
+    rpc ProcessTransactions (stream ProcessingResponse) returns (stream Transaction) {}
+}
