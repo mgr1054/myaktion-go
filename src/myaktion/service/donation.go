@@ -72,4 +72,4 @@ func deleteDonation(donation *model.Donation) error {
 	}
 	entry.Info("Successfully deleted campaign.")
 	return nil
-}
+}	

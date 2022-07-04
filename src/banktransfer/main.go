@@ -8,7 +8,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/mgr1054/myaktion-go/src/banktransfer/grpc/banktransfer"
 	"github.com/mgr1054/myaktion-go/src/banktransfer/service"
-
+	"google.golang.org/grpc"
 )
 
 func init() {
@@ -24,6 +24,7 @@ func init() {
 }
 
 var grpcPort = 9111
+
 func main() {
 	log.Info("Starting Banktransfer server")
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", grpcPort))
