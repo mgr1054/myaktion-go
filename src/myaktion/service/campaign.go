@@ -6,8 +6,8 @@ import (
 	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 
-	"github.com/mgr1054/myaktion-go/src/myaktion/src/myaktion/db"
-	"github.com/mgr1054/myaktion-go/src/myaktion/src/myaktion/model"
+	"github.com/mgr1054/myaktion-go/src/myaktion/db"
+	"github.com/mgr1054/myaktion-go/src/myaktion/model"
 )
 
 func CreateCampaign(campaign *model.Campaign) error {

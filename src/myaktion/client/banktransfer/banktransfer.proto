@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package banktransfer;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/turngeek/myaktion-go/src/banktransfer/grpc/banktransfer";
+
+service BankTransfer {
+    rpc TransferMoney (Transaction) returns (google.protobuf.Empty) {}
+    rpc ProcessTransactions (stream ProcessingResponse) returns (stream Transaction) {}
+}
+message Account  {
+    string name = 1;
+    string bank_name =2;
+    string number = 3;
+}
+
+message Transaction  {
+    int32 id = 1;
+    int32 donation_id = 2;
+    float amount = 3;
+    string reference = 4;
+    Account from_account = 5;
+    Account to_account = 6;
+}
+
+message ProcessingResponse {
+    int32 id = 1;
+}
